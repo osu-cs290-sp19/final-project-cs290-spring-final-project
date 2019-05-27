@@ -16,7 +16,6 @@
       <nav class="navbar">
         <ul class="navlist">
           <li><button type="button" id="create-resume-button">Get Started</button></li>
-          <li><button type="button" id="reset-values-button">Restart?</button></li>
         </ul>
       </nav>
 
@@ -30,7 +29,7 @@
         </div>
 
         <div>
-          <h3>{{Street-Address}} {{City}} {{State}} {{Zip-Code}} </h3>
+          <h3>{{Street-Address}}, {{City}}, {{State}} {{ZipCode}} </h3>
         </div>
 
         <div>
@@ -39,18 +38,189 @@
         /* add border line on the bottom to separate out sections */
       </article>
 
+      <article class="organization-container">
+        <div>
+          <h2>{{Date}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Recipient-Name}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Recipient-Title}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Company-Name}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Recipient-Address}}, {{Recipient-City}}, {{Recipient-State}} {{Recipient-ZipCode}}</h2>
+        </div>
+
+        <div>
+          <h2>Dear {{Recipient-Name}},</h2>
+        </div>
+      </article>
+
+
       <div class="cover-image-container">
         <img src={{Place-Holder}} alt="Cover Picture" title="Cover Picture">
       </div>
+      /* Possibly have this floated to the right of organization text */
 
       <div class="summary-container">
         <p>{{Summary}}</p>
       </div>
 
+      <div class="ending-container" >
+        <div>
+          <h2>Sincerely,</h2>
+        </div>
+
+        <div>
+          <h2>{{Name}}</h2>
+        </div>
+      </div>
+
     </main>
 
     <div id="modal-backdrop" class="hidden"></div>
-    
+    <div id="create-resume-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Your Information</h3>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="input-element">
+            <label for="person-name-input">Name</label>
+            <input type="text" id="person-name-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-email-address-input">Email Address</label>
+            <input type="text" id="person-email-address-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-street-address-input">Street Address</label>
+            <input type="text" id="person-street-address-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-city-input">City</label>
+            <input type="text" id="person-city-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-state-input">State</label>
+            <input type="text" id="person-state-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-zipcode-input">Zip Code</label>
+            <input type="text" id="person-zipcode-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-number-input">Phone Number</label>
+            <input type="text" id="person-number-input">
+          </div>
+
+        </div>
+
+        <div class="person-modal-footer">
+          <button type="button" class="modal-next-button">Next</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="create-resume-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Organization Information</h3>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="input-element">
+            <label for="date">Today's Date</label>
+            <textarea id="date"></textarea>
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-name-input">Recipient's Name</label>
+            <input type="text" id="recipient-name-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-title-input">Recipient's Title</label>
+            <input type="text" id="recipient-title-input">
+          </div>
+
+          <div class="input-element">
+            <label for="company-name-input">Company Name</label>
+            <input type="text" id="company-name-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-street-address-input">Recipient's Address</label>
+            <input type="text" id="recipient-street-address-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-city-input">City</label>
+            <input type="text" id="recipient-city-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-state-input">State</label>
+            <input type="text" id="recipient-state-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-zipcode-input">Zip Code</label>
+            <input type="text" id="recipient-zipcode-input">
+          </div>
+
+        </div>
+
+        <div class="organization-modal-footer">
+          <button type="button" class="modal-next-button">Next</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="create-resume-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Summary Letter</h3>
+        </div>
+
+        <div class="modal-body">
+          <div class="input-element">
+            <label for="summary-input">Summary</label>
+            <textarea id="summary-input"></textarea>
+          </div>
+        </div>
+
+        <div class="last-modal-footer">
+          <button type="button" class="modal-accept-button">Finish Creating Resume</button>
+        </div>
+
+      </div>
+    </div>
+
 
   </body>
 
