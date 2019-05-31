@@ -1,1 +1,46 @@
 
+
+
+header{
+background-color: rgba(158, 158, 158, 0.2);
+box-sizing: border-box;
+border-color: #000000
+width:10x;
+height: 120px;
+text-align: center;
+}
+
+ul.navlist{
+list-style-type: none;
+display: inline-block;
+}
+
+.intro-container{
+background-color: rgba(33, 150, 243, 0.55);
+font-size:12px;
+border-style: solid;
+border-color: black;
+text-align: center;
+
+}
+
+.organization-container{
+font-size:10px;
+width: 300px;
+padding: 10px;
+margin: 10px
+border-color: #000000
+
+}
+
+.cover-image-container{
+  float: right;
+}
+
+.navlist{
+ text-align:inherit;
+}
+
+.hidden {
+  display: none;
+}
