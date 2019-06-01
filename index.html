@@ -1,1 +1,283 @@
+<!DOCTYPE html>
+<html>
 
+  <head>
+
+    <meta charset="utf-8">
+    <link rel = "stylesheet" href = "style.css">
+    <script src = "index.js" defer></script>
+    <title>Cover Letter</title>
+  </head>
+
+  <body>
+
+    <header>
+
+      <h1 class="webpage-title">Cover Letter Template</h1>
+
+      <nav class="navbar">
+        <ul class="navlist">
+          <li><button type="button" id="create-resume-button">Get Started</button></li>
+        </ul>
+      </nav>
+
+    </header>
+
+    <main>
+      <div id = "modal">
+          <div id = "modal-content">
+              <span id = 'close-modal'>&times;</span>
+              <form>
+                  <h1>Cover Page Styling</h1>
+                  <h2>Choose stylings for you cover page:</h2>
+                    <h3>Personal Info Text Size</h3>
+                      <input type = 'number' id = 'personal-info-text-size' value = '10' min = '4' max = '30'>
+                    <h3>Title Text Size</h3>
+                      <input type = 'number' id = 'title-text-size' value = '16' min = '4' max = '30'>
+                    <h3>Summary Text Size</h3>
+                      <input type = 'number' id = 'summary-text-size' value = '12' min = '4' max = '30'>
+                    <h3>Organization Info Text Size</h3>
+                      <input type = 'number' id = 'organization-info-text-size' value = '10' min = '4' max = '30'>
+                    <h3>Text Indent</h3>
+                      <input type = 'radio' name = 'text-indent'>Left
+                      <input type = 'radio' name = 'text-indent'>Center
+                      <input type = 'radio' name = 'text-indent'>Right
+                      <input type = 'radio' name = 'text-indent'>Justify
+                    <h3>Line Spacing</h3>
+                      <input type = 'radio' name = 'line-spacing'>1.0 (single-space)
+                      <input type = 'radio' name = 'line-spacing'>1.15
+                      <input type = 'radio' name = 'line-spacing'>1.5
+                      <input type = 'radio' name = 'line-spacing'>1.75
+                      <input type = 'radio' name = 'line-spacing'>2.0 (double-space)
+                      <input type = 'radio' name = 'line-spacing'>3.0 (triple-space)
+                  <h3>Title Text Decoration</h3>
+                      <input type = 'checkbox' name = 'text-decoration'>Bold
+                      <input type = 'checkbox' name = 'text-decoration'>Italic
+                      <input type = 'checkbox' name = 'text-decoration'>Underline
+                    <h3>Font</h3>
+                      <input type = "radio" name = 'font-type'>Helvetica
+                      <input type = "radio" name = 'font-type'>Roboto
+                      <input type = "radio" name = 'font-type'>Times New Roman
+                      <input type = "radio" name = 'font-type'>Times
+                      <input type = "radio" name = 'font-type'>Courier New<br>
+                      <input type = "radio" name = 'font-type'>Verdana
+                      <input type = "radio" name = 'font-type'>Georgia
+                      <input type = "radio" name = 'font-type'>Palatino
+                      <input type = "radio" name = 'font-type'>Garamond
+                      <input type = "radio" name = 'font-type'>Bookman<br>
+                      <input type = "radio" name = 'font-type'>Comic Sans MS
+                      <input type = "radio" name = 'font-type'>Trebuchet MS
+                      <input type = "radio" name = 'font-type'>Arial Black
+                      <input type = "radio" name = 'font-type'>Impact
+                  <h3>Background Color</h3>
+                      <input type = "color" name = 'color'>
+                  <h3>Image URL</h3>
+                      <input type = 'text' name = 'img-url' value = 'Paste image URL here...'>
+                  
+                      <br><br><br><input type="submit" value="Submit">
+              </form>
+          </div>
+      </div>
+      <article class="intro-container">
+        <div>
+          <h2>{{Name}}</h2>
+        </div>
+
+        <div>
+          <h3>{{Street-Address}}, {{City}}, {{State}} {{ZipCode}} </h3>
+        </div>
+
+        <div>
+          <h3>C : {{Number}} | {{Email-Address}}</h3>
+        </div>
+        /* add border line on the bottom to separate out sections */
+      </article>
+
+      <article class="organization-container">
+        <div>
+          <h2>{{Date}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Recipient-Name}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Recipient-Title}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Company-Name}}</h2>
+        </div>
+
+        <div>
+          <h2>{{Recipient-Address}}, {{Recipient-City}}, {{Recipient-State}} {{Recipient-ZipCode}}</h2>
+        </div>
+
+        <div>
+          <h2>Dear {{Recipient-Name}},</h2>
+        </div>
+      </article>
+
+
+      <div class="cover-image-container">
+        <img src={{Place-Holder}} alt="Cover Picture" title="Cover Picture">
+      </div>
+      /* Possibly have this floated to the right of organization text */
+
+      <div class="summary-container">
+        <p>{{Summary}}</p>
+      </div>
+
+      <div class="ending-container" >
+        <div>
+          <h2>Sincerely,</h2>
+        </div>
+
+        <div>
+          <h2>{{Name}}</h2>
+        </div>
+      </div>
+
+    </main>
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="create-resume-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Your Information</h3>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="input-element">
+            <label for="person-name-input">Name</label>
+            <input type="text" id="person-name-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-email-address-input">Email Address</label>
+            <input type="text" id="person-email-address-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-street-address-input">Street Address</label>
+            <input type="text" id="person-street-address-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-city-input">City</label>
+            <input type="text" id="person-city-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-state-input">State</label>
+            <input type="text" id="person-state-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-zipcode-input">Zip Code</label>
+            <input type="text" id="person-zipcode-input">
+          </div>
+
+          <div class="input-element">
+            <label for="person-number-input">Phone Number</label>
+            <input type="text" id="person-number-input">
+          </div>
+
+        </div>
+
+        <div class="person-modal-footer">
+          <button type="button" class="modal-next-button">Next</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="create-resume-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Organization Information</h3>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="input-element">
+            <label for="date">Today's Date</label>
+            <textarea id="date"></textarea>
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-name-input">Recipient's Name</label>
+            <input type="text" id="recipient-name-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-title-input">Recipient's Title</label>
+            <input type="text" id="recipient-title-input">
+          </div>
+
+          <div class="input-element">
+            <label for="company-name-input">Company Name</label>
+            <input type="text" id="company-name-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-street-address-input">Recipient's Address</label>
+            <input type="text" id="recipient-street-address-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-city-input">City</label>
+            <input type="text" id="recipient-city-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-state-input">State</label>
+            <input type="text" id="recipient-state-input">
+          </div>
+
+          <div class="input-element">
+            <label for="recipient-zipcode-input">Zip Code</label>
+            <input type="text" id="recipient-zipcode-input">
+          </div>
+
+        </div>
+
+        <div class="organization-modal-footer">
+          <button type="button" class="modal-next-button">Next</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="create-resume-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Summary Letter</h3>
+        </div>
+
+        <div class="modal-body">
+          <div class="input-element">
+            <label for="summary-input">Summary</label>
+            <textarea id="summary-input"></textarea>
+          </div>
+        </div>
+
+        <div class="last-modal-footer">
+          <button type="button" class="modal-accept-button">Finish Creating Resume</button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </body>
+
+
+</html>
