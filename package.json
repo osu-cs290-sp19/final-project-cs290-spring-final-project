@@ -1,7 +1,7 @@
 {
   "name": "group",
   "version": "1.0.0",
-  "description": "",
+  "description": "Group final project",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/osu-cs290-sp19/final-project-cs290-spring-final-project/issues"
   },
-  "homepage": "https://github.com/osu-cs290-sp19/final-project-cs290-spring-final-project#readme"
+  "homepage": "https://github.com/osu-cs290-sp19/final-project-cs290-spring-final-project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.1.2",
+    "hbs": "^4.0.4"
+  }
 }
