@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href = "style.css">
+    <script src = "/handebarsTemplates.js" defer></script>
+    <script src = "/index.js" defer></script>
+    <title>Cover Letter</title>
+  </head>
+
+  <body>
+
+    <header>
+
+      <h1 class="webpage-title">Cover Letter Template</h1>
+
+      <nav class="navbar">
+          <button type="button" id="create-resume-button">{{Initial-Message}}</button>
+      </nav>
+
+
+    </header>
+
+    <main>
+
+      <div class="intro-container">
+
+          <div class="intro-text text-box">
+            <h2>{{Name}}</h2>
+          </div>
+
+          <div class="intro-text text-box">
+            <h2>{{Street-Address}},  {{City}},  {{State}}  {{ZipCode}} </h2>
+          </div>
+
+          <div class="intro-text text-box">
+            <h2>C : {{Number}} || {{Email-Address}}</h2>
+          </div>
+
+      </div>
+
+      <div class="line-break">
+      </div>
+
+
+      <article class="org-container">
+        <div class="org-text text-box">
+          <h2>{{Date}}</h2>
+        </div>
+
+        <div class="org-text text-box">
+          <h2>{{Recipient-Name}}</h2>
+        </div>
+
+        <div class="org-text text-box">
+          <h2>{{Recipient-Title}}</h2>
+        </div>
+
+        <div class="org-text text-box">
+          <h2>{{Company-Name}}</h2>
+        </div>
+
+        <div class="org-text text-box">
+          <h2>{{Recipient-Address}}, {{Recipient-City}}, {{Recipient-State}} {{Recipient-ZipCode}}</h2>
+        </div>
+
+        <div class="org-text end-text text-box">
+          <h2>Dear {{Recipient-Name}},</h2>
+        </div>
+
+      <div class="summary-container">
+        <p>{{Summary}}</p>
+      </div>
+
+      <div class="ending-container" >
+        <div>
+          <h2>Sincerely,</h2>
+        </div>
+
+        <div>
+          <h2>{{Name}}</h2>
+        </div>
+      </div>
+
+    </main>
+
+
+    <!-- First Modal -->
+    <div class = "modal hidden">
+          <div class = "modal-content">
+              <span class= "exit-button">&times;</span>
+              <form class = "inner-modal">
+
+                  <div class ="middle">
+                    <h3>Cover Page Styling</h3>
+                  </div>
+
+                  <div class="input-box">
+                    <h3>Choose stylings for you cover page:</h3>
+                  </div>
+
+
+                    <div class="input-box">
+                      <h3>Personal Info Text Size</h3>
+                      <input type = 'radio' name = 'personal-text-size' value="8">8
+                      <input type = 'radio' name = 'personal-text-size' value="10">10
+                      <input type = 'radio' name = 'personal-text-size' value="12">12
+                      <input type = 'radio' name = 'personal-text-size' value="14">14
+                    </div>
+
+                    <div class="input-box">
+                      <h3>Organization Info Text Size</h3>
+                      <input type = 'radio' name = 'org-text-size' value="8">8
+                      <input type = 'radio' name = 'org-text-size' value="10">10
+                      <input type = 'radio' name = 'org-text-size' value="12">12
+                      <input type = 'radio' name = 'org-text-size' value="14">14
+
+                    </div>
+
+                    <div class="input-box">
+                      <h3>Summary Text Size</h3>
+                      <input type = 'radio' name = 'summary-text-size' value='8'>8
+                      <input type = 'radio' name = 'summary-text-size' value='10'>10
+                      <input type = 'radio' name = 'summary-text-size' value='12'>12
+                      <input type = 'radio' name = 'summary-text-size' value='14'>14
+
+                    </div>
+
+                    <div class="input-box">
+                      <h3>Line Spacing</h3>
+                      <input type = 'radio' name = 'line-spacing' value='1'>1.0
+                      <input type = 'radio' name = 'line-spacing' value='1.25'>1.25
+                      <input type = 'radio' name = 'line-spacing' value='1.5'>1.5
+                      <input type = 'radio' name = 'line-spacing' value='1.75'>1.75
+                      <input type = 'radio' name = 'line-spacing' value='2'>2.0
+                    </div>
+
+                    <div class="input-box">
+                      <h3>Fonts</h3>
+                      <input type = "radio" name = 'font-type' value="Helvetica">Helvetica
+                      <input type = "radio" name = 'font-type' value="font-type">Roboto
+                      <input type = "radio" name = 'font-type' value="Times New Roman">Times New Roman
+                      <input type = "radio" name = 'font-type' value="Times">Time
+                    </div>
+
+
+              </form>
+
+              <button class="next-button">Next</button>
+          </div>
+      </div>
+
+
+      <!-- Second Modal -->
+      <div class="modal hidden">
+        <div class="modal-content">
+          <span class= "exit-button">&times;</span>
+          <form class = "inner-modal">
+
+            <div class="middle">
+              <h3>Your Information</h3>
+            </div>
+
+
+            <div class="input-box">
+              <label>Name</label>
+              <input type="text" id="person-name-input">
+            </div>
+
+            <div class="input-box">
+              <label>Email Address</label>
+              <input type="text" id="person-email-address-input">
+            </div>
+
+            <div class="input-box">
+              <label>Street Address</label>
+              <input type="text" id="person-street-address-input">
+            </div>
+
+            <div class="input-box">
+              <label>City</label>
+              <input type="text" id="person-city-input">
+            </div>
+
+            <div class="input-box">
+              <label>State</label>
+              <input type="text" id="person-state-input">
+            </div>
+
+            <div class="input-box">
+              <label>Zip Code</label>
+              <input type="text" id="person-zipcode-input">
+            </div>
+
+            <div class="input-box">
+              <label>Phone Number</label>
+              <input type="text" id="person-number-input">
+            </div>
+
+
+          </form>
+
+          <button class="next-button">Next</button>
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- Third Modal -->
+    <div class="modal hidden">
+      <div class="modal-content">
+      <span class= "exit-button">&times;</span>
+
+      <form class="inner-modal">
+
+        <div class="middle">
+          <h3>Organization Information</h3>
+        </div>
+
+          <div class="input-box">
+            <label>Today's Date (xx/xx/xx)</label>
+            <textarea id="date"></textarea>
+          </div>
+
+          <div class="input-box">
+            <label>Recipient's Name</label>
+            <input type="text" id="recipient-name-input">
+          </div>
+
+          <div class="input-box">
+            <label>Recipient's Title</label>
+            <input type="text" id="recipient-title-input">
+          </div>
+
+          <div class="input-box">
+            <label>Company Name</label>
+            <input type="text" id="company-name-input">
+          </div>
+
+          <div class="input-box">
+            <label >Recipient's Address</label>
+            <input type="text" id="recipient-street-address-input">
+          </div>
+
+          <div class="input-box">
+            <label>City</label>
+            <input type="text" id="recipient-city-input">
+          </div>
+
+          <div class="input-box">
+            <label>State</label>
+            <input type="text" id="recipient-state-input">
+          </div>
+
+          <div class="input-box">
+            <label>Zip Code</label>
+            <input type="text" id="recipient-zipcode-input">
+          </div>
+
+        </form>
+
+        <button class="next-button">Next</button>
+
+      </div>
+    </div>
+
+
+    <div class = "modal hidden">
+      <div class = "modal-content">
+        <span class='exit-button'>&times;</span>
+        <form class='inner-modal'>
+
+          <div class="middle">
+            <h3>Summary Letter</h3>
+          </div>
+
+          <div class="input-box larger-flex">
+              <label for="summary-input">Summary</label>
+              <textarea id="summary-input"></textarea>
+          </div>
+
+
+        </form>
+
+        <input id="finish-button" type="submit" value="Finish">
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+
+</html>
