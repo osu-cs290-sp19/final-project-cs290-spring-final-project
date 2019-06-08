@@ -5,8 +5,8 @@ var exphbs = require('express-handlebars');
 var app = express();
 var port = process.env.PORT || 3000;
 
-//app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
-//app.set('view engine', 'handlebars');
+app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 //var twitData = require('./twitData.json');
 //console.log("== twitData", twitData);
@@ -14,10 +14,30 @@ var port = process.env.PORT || 3000;
 app.use(express.static('public'));
 app.use(express.static('views'));
 
-app.get(['/','/index.html'], function(req, res, next){
-    res.status(200).sendFile(__dirname + '/public/index.html');
+app.get('/', function(req, res, next){
+    res.status(200).render('coverTemplate', {
+      initalMessage: "Get Started",
+      name: "Applicant",
+      streetAddress: "Street Address",
+      city: "City",
+      state: "Oregon",
+      zipCode: "97000",
+      number: "971-000-0000",
+      emailAddress: "email@address.com",
+      date: "01/01/19",
+      recipientName: "Recipient Name",
+      recipientTitle: "CEO",
+      companyName: "WebDev",
+      recipientAddress: "Company Street Address",
+      recipientCity: "Los Angeles",
+      recipientState: "California",
+      recipientZipCode: "97000",
+      summary: "FillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerText"
+
+
+    });
+  });
   //res.status(200).render('box', {twits: twitData})
-});
 
 
 // app.get('*', function (req, res) {

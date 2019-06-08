@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && node server.js",
-    "build": "handlebars views/* -f public/templates.js"
+    "start": "npm run prestart && node server.js",
+    "build": "handlebars views/* -f public/handlebarsTemplates.js",
+    "prestart": "npm run build"
   },
   "repository": {
     "type": "git",
