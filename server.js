@@ -16,7 +16,6 @@ app.use(express.static('views'));
 
 app.get('/', function(req, res, next){
     res.status(200).render('coverTemplate', {
-      initalMessage: "Get Started",
       name: "Applicant",
       streetAddress: "Street Address",
       city: "City",
