@@ -175,3 +175,10 @@ body {
 .larger-flex {
   flex: 8 50px;
 }
+
+.error-container {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: lightblue;
+}

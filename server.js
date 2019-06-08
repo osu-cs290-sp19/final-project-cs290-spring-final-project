@@ -12,10 +12,12 @@ app.set('view engine', 'handlebars');
 //console.log("== twitData", twitData);
 
 app.use(express.static('public'));
+/*
 app.use(express.static('views'));
+*/
 
 app.get('/', function(req, res, next){
-    res.status(200).render('coverTemplate', {
+    res.status(200).render('/view/partials/coverTemplate', {
       initalMessage: "Get Started",
       name: "Applicant",
       streetAddress: "Street Address",
