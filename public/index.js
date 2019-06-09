@@ -8,8 +8,12 @@ var finishButton = document.getElementById('finish-button');
 
 
     getStartedButton.addEventListener('click', function() {
+        if(getStartedButton.value === "Get Started") {
+            modals[0].classList.toggle('hidden');
+
+
+        }
         //Open modal when 'Get Started' is clicked
-        modals[0].classList.toggle('hidden');
     });
 
     /*
@@ -135,7 +139,7 @@ var finishButton = document.getElementById('finish-button');
 
       modals[3].classList.add('hidden');
       /* get all the inputs here and create the resume */
-      
+
 
 
 
