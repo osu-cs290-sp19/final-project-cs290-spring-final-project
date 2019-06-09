@@ -1,9 +1,12 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['404'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<main class=\"error-container\">\n    <h2>404</h2>\n    <h3>Woops!  We couldn't find that page.</h3>\n</main>";
+},"useData":true});
 templates['coverTemplate'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "\n<main>\n\n  <div class=\"intro-container\">\n\n      <div class=\"intro-text text-box\">\n        <h2>"
+  return "<main>\n\n  <div class=\"intro-container\">\n\n      <div class=\"intro-text text-box\">\n        <h2>"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "</h2>\n      </div>\n\n      <div class=\"intro-text text-box\">\n        <h2>"
     + alias4(((helper = (helper = helpers.streetAddress || (depth0 != null ? depth0.streetAddress : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"streetAddress","hash":{},"data":data}) : helper)))
