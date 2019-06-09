@@ -6,7 +6,6 @@ var finishButton = document.getElementById('finish-button');
 
 
 
-
     getStartedButton.addEventListener('click', function() {
         if(getStartedButton.value === "Get Started") {
             modals[0].classList.toggle('hidden');
@@ -31,7 +30,6 @@ var finishButton = document.getElementById('finish-button');
       var lineSpacing = document.querySelector('input[name=line-spacing]:checked');
       var fontType = document.querySelector('input[name=font-type]:checked');
 
-
       if ( (personalTextSize) && (organizationTextSize) && (summaryTextSize) && (lineSpacing) && (fontType) ) {
 
           console.log("Made it through first modal")
@@ -49,7 +47,6 @@ var finishButton = document.getElementById('finish-button');
         alert('Please fill out all values on this form');
       }
     });
-
 
     nextButton[1].addEventListener('click', function() {
         var personNameInput = document.getElementById('person-name-input');
@@ -106,20 +103,10 @@ var finishButton = document.getElementById('finish-button');
            console.log("recipientStateInput:", recipientStateInput.value);
            console.log("recipientZipCodeInput", recipientZipCodeInput.value);
 
-
-
-
-
-
-
-
-
            modals[2].classList.toggle('hidden');
            modals[3].classList.toggle('hidden');
         }
     });
-
-
 
 
     for (let b = 0; b < closeButton.length; b++) {
@@ -139,8 +126,5 @@ var finishButton = document.getElementById('finish-button');
 
       modals[3].classList.add('hidden');
       /* get all the inputs here and create the resume */
-
-
-
 
     });

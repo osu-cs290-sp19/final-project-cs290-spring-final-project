@@ -2,6 +2,7 @@
   margin: 0;
 }
 
+
 .modal {
     display: block;
     position: fixed;
@@ -175,6 +176,7 @@ body {
 .larger-flex {
   flex: 8 50px;
 }
+
 
 .error-container {
   height: 100%;
