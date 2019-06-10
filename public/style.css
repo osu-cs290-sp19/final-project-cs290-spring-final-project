@@ -184,3 +184,45 @@ body {
   text-align: center;
   color: lightblue;
 }
+
+.text-8 {
+  font-size: 8;
+}
+
+.text-10 {
+  font-size: 10;
+
+}
+.text-12{
+  font-size: 12;
+}
+
+.text-14 {
+  font-size: 14;
+}
+
+#helvetica {
+  font-family: helvetica;
+
+}
+#arial {
+  font-family: arial;
+
+}
+
+#timesNewRoman {
+  font-family: "Times New Roman";
+}
+
+#times {
+  font-family: Times;
+
+}
+
+.lightgrey {
+  background-color: lightgrey;
+}
+
+.white {
+  background-color: white;
+}

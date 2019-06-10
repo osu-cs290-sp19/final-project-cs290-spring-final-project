@@ -3,15 +3,15 @@
   <h1 class="webpage-title">Cover Letter Template</h1>
 
   <nav class="navbar">
-      <button type="button" id="create-resume-button">{{initialMessage}}</button>
+      <button type="button" id="create-resume-button">{{name}}'s Resume</button>
   </nav>
 
 </header>
 
 
-<main>
+<main id={{font-type}} class={{backgroundColor}}>
 
-  <div class="intro-container">
+  <div class="intro-container {{personalTextSize}}">
 
       <div class="intro-text text-box">
         <h2>{{name}}</h2>
@@ -31,7 +31,7 @@
   </div>
 
 
-  <article class="org-container">
+  <article class="org-container {{orgTextSize}}">
     <div class="org-text text-box">
       <h2>{{date}}</h2>
     </div>
@@ -55,12 +55,13 @@
     <div class="org-text end-text text-box">
       <h2>Dear {{recipientName}},</h2>
     </div>
+  </article>
 
-  <div class="summary-container">
+  <div class="summary-container {{summaryTextSize}}">
     <p>{{summary}}</p>
   </div>
 
-  <div class="ending-container" >
+  <div class="ending-container {{summaryTextSize}}">
     <div>
       <h2>Sincerely,</h2>
     </div>
