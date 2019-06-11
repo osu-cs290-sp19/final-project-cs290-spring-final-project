@@ -8,7 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
 var app = express();
 var port = process.env.PORT || 3000;
 
-var mongoHost = process.env.MONGO_HOST;
+var mongoHost = process.env.MONGO_HOST || '127.0.0.1';
 var mongoPort = process.env.MONGO_PORT || 27017;
 var mongoUser = process.env.MONGO_USER;
 var mongoPassword = process.env.MONGO_PASSWORD;
@@ -28,16 +28,16 @@ app.use(express.static('views'));
 
 
 
-/*
+
 app.get(['/','index.html'], function (req, res, next) {
     var collection = db.collect('people');
     res.status(200).render('home', { people: collection });
-);
+});
 
 
 
 
-app.get('/person/:personID') {
+app.get('/person/:personID', function (req, res, next) {
   var personIDRequested = req.params.personID.toLowerCase();
   var collection = db.collection('people');
   collection.find({ personID: personIDRequested }).toArray(function (err,people) {
@@ -51,8 +51,8 @@ app.get('/person/:personID') {
       console.log("==Person Info: ", people);
       res.status(200).render('coverTemplate', people[0]);
     }
-  }
-}
+  });
+});
 
 app.post("/createresume", function (req, res, next) {
   if (req.body && req.personID && req.name && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
@@ -91,15 +91,6 @@ app.post("/createresume", function (req, res, next) {
     }
 });
 
-
-
-
-
-
-    }
-  }
-
-}
 
 
 app.get('*', function (req, res) {
