@@ -18,7 +18,7 @@
       <h1 class="webpage-title">Cover Letter Template</h1>
 
       <nav class="navbar">
-          <button type="button" id="create-resume-button">Get Started</button>
+          <button type="button" id="create-resume-button">{{Initial-Message}}</button>
       </nav>
 
 
@@ -102,50 +102,40 @@
                     <h3>Choose stylings for you cover page:</h3>
                   </div>
 
+
                     <div class="input-box">
                       <h3>Personal Info Text Size</h3>
-                      <input type = 'number' id = 'personal-info-text-size' value = '10' min = '4' max = '30'>
-                    </div>
-
-                    <div class="input-box">
-                      <h3>Title Text Size</h3>
-                      <input type = 'number' id = 'title-text-size' value = '16' min = '4' max = '30'>
-                    </div>
-
-                    <div class="input-box">
-                      <h3>Summary Text Size</h3>
-                      <input type = 'number' id = 'summary-text-size' value = '12' min = '4' max = '30'>
+                      <input type = 'radio' name = 'personal-text-size' value="8">8
+                      <input type = 'radio' name = 'personal-text-size' value="10">10
+                      <input type = 'radio' name = 'personal-text-size' value="12">12
+                      <input type = 'radio' name = 'personal-text-size' value="14">14
                     </div>
 
                     <div class="input-box">
                       <h3>Organization Info Text Size</h3>
-                      <input type = 'number' id = 'organization-info-text-size' value = '10' min = '4' max = '30'>
+                      <input type = 'radio' name = 'org-text-size' value="8">8
+                      <input type = 'radio' name = 'org-text-size' value="10">10
+                      <input type = 'radio' name = 'org-text-size' value="12">12
+                      <input type = 'radio' name = 'org-text-size' value="14">14
+
                     </div>
 
                     <div class="input-box">
-                      <h3>Text Indent</h3>
-                      <input type = 'radio' name = 'text-indent'>Left
-                      <input type = 'radio' name = 'text-indent'>Center
-                      <input type = 'radio' name = 'text-indent'>Right
-                      <input type = 'radio' name = 'text-indent'>Justify
-                    </div>
+                      <h3>Summary Text Size</h3>
+                      <input type = 'radio' name = 'summary-text-size' value='8'>8
+                      <input type = 'radio' name = 'summary-text-size' value='10'>10
+                      <input type = 'radio' name = 'summary-text-size' value='12'>12
+                      <input type = 'radio' name = 'summary-text-size' value='14'>14
 
+                    </div>
 
                     <div class="input-box">
                       <h3>Line Spacing</h3>
-                      <input type = 'radio' name = 'line-spacing'>1.0 (single-space)
-                      <input type = 'radio' name = 'line-spacing'>1.15
-                      <input type = 'radio' name = 'line-spacing'>1.5
-                      <input type = 'radio' name = 'line-spacing'>1.75
-                      <input type = 'radio' name = 'line-spacing'>2.0 (double-space)
-                      <input type = 'radio' name = 'line-spacing'>3.0 (triple-space)
-                    </div>
-
-                    <div class="input-box">
-                      <h3>Title Text Decoration</h3>
-                      <input type = 'checkbox' name = 'text-decoration'>Bold
-                      <input type = 'checkbox' name = 'text-decoration'>Italic
-                      <input type = 'checkbox' name = 'text-decoration'>Underline
+                      <input type = 'radio' name = 'line-spacing' value='1'>1.0
+                      <input type = 'radio' name = 'line-spacing' value='1.25'>1.25
+                      <input type = 'radio' name = 'line-spacing' value='1.5'>1.5
+                      <input type = 'radio' name = 'line-spacing' value='1.75'>1.75
+                      <input type = 'radio' name = 'line-spacing' value='2'>2.0
                     </div>
 
                     <div class="input-box">
@@ -169,6 +159,7 @@
         <div class="modal-content">
           <span class= "exit-button">&times;</span>
           <form class = "inner-modal">
+
             <div class="middle">
               <h3>Your Information</h3>
             </div>
@@ -296,6 +287,7 @@
 
 
         </form>
+
         <input id="finish-button" type="submit" value="Finish">
 
       </div>

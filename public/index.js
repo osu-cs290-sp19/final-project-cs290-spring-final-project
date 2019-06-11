@@ -4,9 +4,38 @@ var closeButton = document.getElementsByClassName('exit-button');
 var nextButton = document.getElementsByClassName('next-button');
 var finishButton = document.getElementById('finish-button');
 
+var personInfo = {
+  personID: "",
+  name: "",
+  streetAddress: "",
+  city: "",
+  state: "",
+  zipCode: "",
+  number: "",
+  emailAddress: "",
+  date: "",
+  recipientName: "",
+  recipientTitle: "",
+  companyName: "",
+  recipientAddress: "",
+  recipientCity: "",
+  recipientState: "",
+  recipientZipCode: "",
+  fontType: "",
+  personalTextSize: "",
+  orgTextSize: "",
+  summaryTextSize: "",
+  backgroundColor: "",
+  summary: ""
+}
+
     getStartedButton.addEventListener('click', function() {
+        if(getStartedButton.value === "Get Started") {
+            modals[0].classList.toggle('hidden');
+
+
+        }
         //Open modal when 'Get Started' is clicked
-        modals[0].classList.toggle('hidden');
     });
 
     /*
@@ -18,20 +47,27 @@ var finishButton = document.getElementById('finish-button');
     });
     */
     nextButton[0].addEventListener('click', function() {
-      var personalTextSize = document.querySelector('input[name=personal-text-size]:checked');
-      var organizationTextSize = document.querySelector('input[name=org-text-size]:checked');
-      var summaryTextSize = document.querySelector('input[name=summary-text-size]:checked');
-      var lineSpacing = document.querySelector('input[name=line-spacing]:checked');
-      var fontType = document.querySelector('input[name=font-type]:checked');
+      var newPersonalTextSize = document.querySelector('input[name=personal-text-size]:checked');
+      var newOrgTextSize = document.querySelector('input[name=org-text-size]:checked');
+      var newSummaryTextSize = document.querySelector('input[name=summary-text-size]:checked');
+      var newFontType = document.querySelector('input[name=font-type]:checked');
+      var newBackgroundColor = document.querySelector('input[name=background-color-type]:checked');
 
-      if ( (personalTextSize) && (organizationTextSize) && (summaryTextSize) && (lineSpacing) && (fontType) ) {
+      if ( (newPersonalTextSize) && (newOrgTextSize) && (newSummaryTextSize) && (newFontType) && (newBackgroundColor) ) {
 
           console.log("Made it through first modal")
+
           console.log("personalTextSize: ", personalTextSize.value);
-          console.log("organizationTextSize: ", organizationTextSize.value);
+          console.log("orgTextSize: ", orgTextSize.value);
           console.log("summaryTextSize: ", summaryTextSize.value);
-          console.log("lineSpacing: ", lineSpacing.value);
           console.log("fontType: ", fontType.value);
+          console.log("backgroundColor: " backgroundColor.value);
+
+          personInfo.personalTextSize = newPersonalTextSize.value;
+          personInfo.orgTextSize = newOrgTextSize.value;
+          personInfo.summaryTextSize = newSummaryTextSize.value;
+          personInfo.fontType = newFontType.value;
+          personInfo.backgroundColor = newBackgroundColor.value;
 
           /* do logic */
           modals[0].classList.toggle('hidden');
@@ -43,25 +79,47 @@ var finishButton = document.getElementById('finish-button');
     });
 
     nextButton[1].addEventListener('click', function() {
-        var personNameInput = document.getElementById('person-name-input');
-        var personEmailInput = document.getElementById('person-email-address-input');
-        var personStreetInput = document.getElementById('person-street-address-input');
-        var personCityInput = document.getElementById('person-city-input');
-        var personStateInput = document.getElementById('person-state-input');
-        var personZipCodeInput = document.getElementById('person-zipcode-input');
-        var personNumberInput = document.getElementById('person-number-input');
+        var newPersonNameInput = document.getElementById('person-name-input');
+        var newPersonEmailInput = document.getElementById('person-email-address-input');
+        var newPersonStreetInput = document.getElementById('person-street-address-input');
+        var newPersonCityInput = document.getElementById('person-city-input');
+        var newPersonStateInput = document.getElementById('person-state-input');
+        var newPersonZipCodeInput = document.getElementById('person-zipcode-input');
+        var newPersonNumberInput = document.getElementById('person-number-input');
 
-        if ( (personNameInput.value !== "") && (personEmailInput.value !== "") && (personStreetInput.value !== "") && (personCityInput.value !== "") && (personStateInput.value !== "") && (personZipCodeInput.value !== "") && (personNameInput.value !="") )  {
+        if ( (newPersonNameInput.value !== "") && (newPersonEmailInput.value !== "") && (newPersonStreetInput.value !== "") && (newPersonCityInput.value !== "") &&
+           (newPersonStateInput.value !== "") && (newPersonZipCodeInput.value !== "") && (newPersonNameInput.value !== "") )  {
 
           console.log("Made it through second modal")
 
-          console.log("personNameInput: ", personNameInput.value);
-          console.log("personEmailInput: ", personEmailInput.value);
-          console.log("personStreetInput: ", personStreetInput.value);
-          console.log("personCityInput: ", personCityInput.value);
-          console.log("personStateInput: ", personStateInput.value);
-          console.log("personZipCodeInput: ", personZipCodeInput.value);
-          console.log("personNumberInput: ", personNumberInput.value);
+          console.log("newPersonNameInput: ", newPersonNameInput.value);
+          console.log("newPersonEmailInput: ", newPersonEmailInput.value);
+          console.log("newPersonStreetInput: ", newPersonStreetInput.value);
+          console.log("newPersonCityInput: ", newPersonCityInput.value);
+          console.log("newPersonStateInput: ", newPersonStateInput.value);
+          console.log("newPersonZipCodeInput: ", newPersonZipCodeInput.value);
+          console.log("newPersonNumberInput: ", newPersonNumberInput.value);
+
+          personInfo.name = newPersonNameInput.value;
+          personInfo.emailAddress = newPersonEmailInput.value;
+          personInfo.streetAddress = newPersonStreetInput.value;
+          personInfo.city = newPersonCityInput.value;
+          personInfo.state = newPersonStateInput.value;
+          personInfo.zipCode = newPersonZipCodeInput.value;
+          personInfo.number = newPersonNumberInput.value;
+
+          /* split the name and add to personID */
+          var newPersonID = newPersonNameInput.value.split(' ');
+          var fullPersonID = "";
+          for (var c = 0; c < newPersonID.length; c++) {
+            if (c === 0) {
+              fullPersonID += newPersonID[c];
+            } else {
+              fullPersonID += "-"
+              fullPersonID += newPersonID[c];
+            }
+          }
+          personInfo.personID = fullPersonID;
 
 
           modals[1].classList.toggle('hidden');
@@ -70,36 +128,54 @@ var finishButton = document.getElementById('finish-button');
         } else {
           alert('Please fill out all values on this form');
         }
+
     });
 
     nextButton[2].addEventListener('click', function() {
-      var date = document.getElementById('date');
-      var recipientNameInput = document.getElementById('recipient-name-input');
-      var recipientTitleInput = document.getElementById('recipient-title-input');
-      var companyNameInput = document.getElementById('company-name-input');
-      var recipientStreetInput = document.getElementById('recipient-street-address-input');
-      var recipientCityInput = document.getElementById('recipient-city-input');
-      var recipientStateInput = document.getElementById('recipient-state-input');
-      var recipientZipCodeInput = document.getElementById('recipient-zipcode-input');
+      var newDate = document.getElementById('date');
+      var newRecipientNameInput = document.getElementById('recipient-name-input');
+      var newRecipientTitleInput = document.getElementById('recipient-title-input');
+      var newCompanyNameInput = document.getElementById('company-name-input');
+      var newRecipientStreetInput = document.getElementById('recipient-street-address-input');
+      var newRecipientCityInput = document.getElementById('recipient-city-input');
+      var newRecipientStateInput = document.getElementById('recipient-state-input');
+      var newRecipientZipCodeInput = document.getElementById('recipient-zipcode-input');
 
-      if ( (date.value !== "") && (recipientNameInput.value !== "") && (recipientTitleInput.value !== "") && (companyNameInput.value !== "") &&
-         (recipientStreetInput.value !== "") && (recipientCityInput.value !== "") && (recipientStateInput.value !== "") && (recipientZipCodeInput.value !== "") ) {
+      if ( (newDate.value !== "") && (newRecipientNameInput.value !== "") && (newRecipientTitleInput.value !== "") && (newCompanyNameInput.value !== "") &&
+         (newRecipientStreetInput.value !== "") && (newRecipientCityInput.value !== "") && (newRecipientStateInput.value !== "") && (newRecipientZipCodeInput.value !== "") ) {
 
            console.log("Made it through third modal");
 
-           console.log("date: ", date.value);
-           console.log("recipientNameInput: ", recipientNameInput.value);
-           console.log("recipientTitleInput: ", recipientTitleInput.value);
-           console.log("companyNameInput", companyNameInput.value);
-           console.log("recipientStreetInput: ", recipientStreetInput.value);
-           console.log("recipientCityInput: ", recipientCityInput.value);
-           console.log("recipientStateInput:", recipientStateInput.value);
-           console.log("recipientZipCodeInput", recipientZipCodeInput.value);
+           console.log("newDate: ", newDate.value);
+           console.log("newRecipientNameInput: ", newRecipientNameInput.value);
+           console.log("newRecipientTitleInput: ", newRecipientTitleInput.value);
+           console.log("newCompanyNameInput", newCompanyNameInput.value);
+           console.log("newRecipientStreetInput: ", newRecipientStreetInput.value);
+           console.log("newRecipientCityInput: ", newRecipientCityInput.value);
+           console.log("newRecipientStateInput:", newRecipientStateInput.value);
+           console.log("newRecipientZipCodeInput", newRecipientZipCodeInput.value);
+
+          personInfo.Date = newDate.value;
+          personInfo.recipientName = newRecipientNameInput.value;
+          personInfo.recipientTitle = newRecipientTitleInput.value;
+          personInfo.companyName = newCompanyNameInput.value;
+          personInfo.recipientStreet = newRecipientStreetInput.value;
+          personInfo.recipientCity = newRecipientCityInput.value;
+          personInfo.recipientState = newRecipientStateInput.value;
+          personInfo.recipientZipCode = newRecipientZipCodeInput.value;
+
+
 
            modals[2].classList.toggle('hidden');
            modals[3].classList.toggle('hidden');
-        }
+
+
+
+      } else {
+          alert('Please fill out all values on this form');
+      }
     });
+
 
     for (let b = 0; b < closeButton.length; b++) {
       closeButton[b].addEventListener('click', function () {
@@ -114,8 +190,36 @@ var finishButton = document.getElementById('finish-button');
 
       if (summaryInput.value !== "") {
         console.log("Made it through all the modals");
+
+        console.log("summaryInput: ", summaryInput);
+
+        personInfo.summary = summaryInput.value;
+
+
+        /* send server request */
+        var request = new XMLHttpRequest();
+        request.open('POST', '/createresume);
+
+        var requestBody = JSON.stringify(personInfo);
+        console.log("==requestBody: ", requestBody);
+
+        request.addEventListener('load', function(event) {
+          if (event.target.status === 200) {
+
+            var newDiv = document.createElement('div');
+            var newA = document.createElement('a');
+            newA.href = "/person/" + personInfo.personID;
+            newA.textContent = personInfo.name;
+            newDiv.appendChild(newA);
+            var container = document.getElementsByTagName('main');
+            container[0].appendChild(newDiv);
+          } else {
+            var message = event.target.response;
+            alert("Error - User info could not be saved on server: " + message);
+          }
+          modals[3].classList.add('hidden');
+      } else {
+        alert('Please fill out all values on this form');
       }
 
-      modals[3].classList.add('hidden');
-      /* get all the inputs here and create the resume */
     });

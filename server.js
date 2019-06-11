@@ -25,31 +25,95 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(express.static('views'));
 
-app.get(['/','index.html'], function(req, res, next){
-    res.status(200).render('coverTemplate', {
-      name: "Applicant",
-      streetAddress: "Street Address",
-      city: "City",
-      state: "Oregon",
-      zipCode: "97000",
-      number: "971-000-0000",
-      emailAddress: "email@address.com",
-      date: "01/01/19",
-      recipientName: "Recipient Name",
-      recipientTitle: "CEO",
-      companyName: "WebDev",
-      recipientAddress: "Company Street Address",
-      recipientCity: "Los Angeles",
-      recipientState: "California",
-      recipientZipCode: "97000",
-      summary: "FillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerTextFillerText"
-    });
-  });
+
+
+
+/*
+app.get(['/','index.html'], function (req, res, next) {
+    var collection = db.collect('people');
+    res.status(200).render('home', { people: collection });
+);
+
+
+
+
+app.get('/person/:personID') {
+  var personIDRequested = req.params.personID.toLowerCase();
+  var collection = db.collection('people');
+  collection.find({ personID: personIDRequested }).toArray(function (err,people) {
+    if (err) {
+      res.status(500).send({
+        error: "Not a valid person"
+      });
+    } else if (people.length < 1) {
+      next();
+    } else {
+      console.log("==Person Info: ", people);
+      res.status(200).render('coverTemplate', people[0]);
+    }
+  }
+}
+
+app.post("/createresume", function (req, res, next) {
+  if (req.body && req.personID && req.name && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
+     && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType
+     && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.backgroundColor && req.summary) {
+      var collection = db.collection('people');
+      collection.insertOne( {
+        personID: req.personID,
+        name: req.name,
+        streetAddress: req.streetAddress,
+        city: req.city,
+        state: req.state,
+        zipCode: req.zipCode,
+        number: req.number,
+        emailAddress: req.emailAddress,
+        date: req.date,
+        recipientName: req.recipientName,
+        recipientTitle: req.recipientTitle,
+        companyName: req.companyName,
+        recipientAddress: req.recipientAddress,
+        recipientCity: req.recipientCity,
+        recipientState: req.recipientState,
+        recipientZipCode: req.recipientZipCode,
+        fontType: req.fontType,
+        personalTextSize: req.personalTextSize,
+        orgTextSize: req.orgTextSize,
+        summaryTextSize: req.summaryTextSize,
+        backgroundColor: req.backgroundColor,
+        summary: req.summary
+      });
+      res.status(200).send("Information saved successfully");
+    } else {
+      res.status(500).send({
+        error: "Information could not be sent to server"
+      })
+    }
+});
+
+
+
+
+
+
+    }
+  }
+
+}
+
 
 app.get('*', function (req, res) {
   res.status(404).render('404');
 });
 
-app.listen(port, function () {
-  console.log("== Server is listening on port", port);
+
+MongoClient.connect(mongoUrl, function (err, client) {
+  if (err) {
+    throw err;
+  } else {
+    db = client.db(mongoDBName);
+    app.listen(port, function () {
+      console.log("== Server is listening on port", port);
+    });
+  }
 });

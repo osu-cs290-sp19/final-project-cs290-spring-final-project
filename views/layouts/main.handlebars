@@ -9,17 +9,11 @@
     <script src = "/handebarsTemplates.js" defer></script>
     <script src = "/index.js" defer></script>
     <title>Cover Letter</title>
+
   </head>
 
-  <body>
-    <header>
-      <h1 class="webpage-title">Cover Letter Template</h1>
-      <nav class="navbar">
-        <button type="button" id="create-resume-button">Get Started</button>
-      </nav>
-    </header>
-
     {{{body}}}
+
 
     <!-- First Modal -->
     <div class = "modal hidden">
@@ -34,6 +28,7 @@
                   <div class="input-box">
                     <h3>Choose stylings for you cover page:</h3>
                   </div>
+
 
                     <div class="input-box">
                       <h3>Personal Info Text Size</h3>
@@ -62,20 +57,17 @@
                     </div>
 
                     <div class="input-box">
-                      <h3>Line Spacing</h3>
-                      <input type = 'radio' name = 'line-spacing' value='1'>1.0
-                      <input type = 'radio' name = 'line-spacing' value='1.25'>1.25
-                      <input type = 'radio' name = 'line-spacing' value='1.5'>1.5
-                      <input type = 'radio' name = 'line-spacing' value='1.75'>1.75
-                      <input type = 'radio' name = 'line-spacing' value='2'>2.0
+                      <h3>Fonts</h3>
+                      <input type = "radio" name = 'font-type' value="helvetica">Helvetica
+                      <input type = "radio" name = 'font-type' value="arial">Arial
+                      <input type = "radio" name = 'font-type' value="timesNewRoman">Times New Roman
+                      <input type = "radio" name = 'font-type' value="times">Time
                     </div>
 
                     <div class="input-box">
-                      <h3>Fonts</h3>
-                      <input type = "radio" name = 'font-type' value="Helvetica">Helvetica
-                      <input type = "radio" name = 'font-type' value="font-type">Roboto
-                      <input type = "radio" name = 'font-type' value="Times New Roman">Times New Roman
-                      <input type = "radio" name = 'font-type' value="Times">Time
+                      <h3>Background Color</h3>
+                      <input type = "radio" name = 'background-color-type' value="white">White
+                      <input type = "radio" name = 'background-color-type' value="lightgrey">lightgrey
                     </div>
 
               </form>
@@ -83,6 +75,7 @@
               <button class="next-button">Next</button>
           </div>
       </div>
+
 
       <!-- Second Modal -->
       <div class="modal hidden">
@@ -218,5 +211,7 @@
 
       </div>
     </div>
+
   </body>
+
 </html>
