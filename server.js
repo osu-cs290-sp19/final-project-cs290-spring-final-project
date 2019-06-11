@@ -25,17 +25,10 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(express.static('views'));
 
-
-
-
-
 app.get(['/','index.html'], function (req, res, next) {
     var collection = db.collect('people');
     res.status(200).render('home', { people: collection });
 });
-
-
-
 
 app.get('/person/:personID', function (req, res, next) {
   var personIDRequested = req.params.personID.toLowerCase();
@@ -83,20 +76,18 @@ app.post("/createresume", function (req, res, next) {
         backgroundColor: req.backgroundColor,
         summary: req.summary
       });
-      res.status(200).send("Information saved successfully");
-    } else {
-      res.status(500).send({
-        error: "Information could not be sent to server"
-      })
-    }
+    res.status(200).send("Information saved successfully");
+
+  } else {
+    res.status(500).send({
+      error: "Information could not be sent to server"
+    });
+  }
 });
-
-
 
 app.get('*', function (req, res) {
   res.status(404).render('404');
 });
-
 
 MongoClient.connect(mongoUrl, function (err, client) {
   if (err) {
