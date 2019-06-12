@@ -10,8 +10,8 @@ var port = process.env.PORT || 3000;
 
 var mongoHost = process.env.MONGO_HOST || '127.0.0.1';
 var mongoPort = process.env.MONGO_PORT || 27017;
-var mongoUser = process.env.MONGO_USER;
-var mongoPassword = process.env.MONGO_PASSWORD;
+var mongoUser = process.env.MONGO_USER || '';
+var mongoPassword = process.env.MONGO_PASSWORD || '';
 var mongoDBName = process.env.MONGO_DB_NAME;
 
 var mongoUrl = `mongodb://${mongoUser}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDBName}`;
@@ -47,7 +47,7 @@ app.get('/person/:personID', function (req, res, next) {
   });
 });
 
-app.post("/createresume", function (req, res, next) {
+app.post('/createresume', function (req, res, next) {
   if (req.body && req.personID && req.name && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
      && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType
      && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.backgroundColor && req.summary) {
