@@ -8,13 +8,17 @@ var MongoClient = require('mongodb').MongoClient;
 var app = express();
 var port = process.env.PORT || 3000;
 
-var mongoHost = process.env.MONGO_HOST || "classmongo.engr.oregonstate.edu";
+var mongoHost = process.env.MONGO_HOST || '127.0.0.1';
 var mongoPort = process.env.MONGO_PORT || 27017;
-var mongoUser = process.env.MONGO_USER || "cs290_trinhan";
-var mongoPassword = process.env.MONGO_PASSWORD || "cs290_trinhan";
-var mongoDBName = process.env.MONGO_DB_NAME || "people";
+var mongoUser = process.env.MONGO_USER;
+var mongoPassword = process.env.MONGO_PASSWORD;
+var mongoDBName = process.env.MONGO_DB_NAME || 'something';
 
 var mongoUrl = `mongodb://${mongoUser}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDBName}`;
+if (fs.existsSync('.dev')) {
+  mongoUrl = `mongodb://${mongoHost}:${mongoPort}/${mongoDBName}`;
+}
+
 var db = null;
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
@@ -25,19 +29,30 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(express.static('views'));
 
-
-
 app.get(['/','index.html'], function (req, res, next) {
-    var collection = db.collect('people');
+    var collection = db.collection('people');
     res.status(200).render('home', { people: collection });
 });
 
+app.get('/person/:personID', function (req, res, next) {
+  var personIDRequested = req.params.personID.toLowerCase();
+  var collection = db.collection('people');
+  collection.find({ personID: personIDRequested }).toArray(function (err,people) {
+    if (err) {
+      res.status(500).send({
+        error: "Not a valid person"
+      });
+    } else if (people.length < 1) {
+      next();
+    } else {
+      console.log("==Person Info: ", people);
+      res.status(200).render('coverTemplate', people[0]);
+    }
+  });
+});
 
 
-
-
-
-app.post("/createresume", function (req, res, next) {
+app.post('/createresume', function (req, res, next) {
   if (req.body && req.personID && req.name && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
      && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType
      && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.backgroundColor && req.summary) {
@@ -66,28 +81,13 @@ app.post("/createresume", function (req, res, next) {
         backgroundColor: req.backgroundColor,
         summary: req.summary
       });
-      res.status(200).send("Information saved successfully");
-    } else {
-      res.status(500).send("Information could not be sent to server");
-    }
-});
+    res.status(200).send("Information saved successfully");
 
-
-app.get('/person/:personID', function (req, res, next) {
-  var personIDRequested = req.params.personID.toLowerCase();
-  var collection = db.collection('people');
-  collection.find({ personID: personIDRequested }).toArray(function (err, people) {
-    if (err) {
-      res.status(500).send({
-        error: "Not a valid person"
-      });
-    } else if (people.length < 1) {
-      next();
-    } else {
-      console.log("==Person Info: ", people);
-      res.status(200).render('coverTemplate', people[0]);
-    }
-  });
+  } else {
+    res.status(500).send({
+      error: "Information could not be sent to server"
+    });
+  }
 });
 
 
@@ -95,7 +95,6 @@ app.get('/person/:personID', function (req, res, next) {
 app.get('*', function (req, res) {
   res.status(404).render('404');
 });
-
 
 MongoClient.connect(mongoUrl, { useNewUrlParser: true }, function (err, client) {
   if (err) {

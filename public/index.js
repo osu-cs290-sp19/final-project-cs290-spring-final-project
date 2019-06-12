@@ -28,7 +28,6 @@ var personInfo = {
   backgroundColor: "",
   summary: ""
 }
-
     getStartedButton.addEventListener('click', function() {
         if(getStartedButton.value === "Get Started") {
             modals[0].classList.toggle('hidden');
@@ -38,14 +37,6 @@ var personInfo = {
         //Open modal when 'Get Started' is clicked
     });
 
-    /*
-    window.addEventListener('click', function(event) {
-        //Close modal if user clicks dark area outside form outline
-       if (event.target === modal) {
-           modal[0].classList.toggle('hidden');
-       }
-    });
-    */
     nextButton[0].addEventListener('click', function() {
       var newPersonalTextSize = document.querySelector('input[name=personal-text-size]:checked');
       var newOrgTextSize = document.querySelector('input[name=org-text-size]:checked');
@@ -61,7 +52,7 @@ var personInfo = {
           console.log("orgTextSize: ", orgTextSize.value);
           console.log("summaryTextSize: ", summaryTextSize.value);
           console.log("fontType: ", fontType.value);
-          console.log("backgroundColor: " backgroundColor.value);
+          console.log("backgroundColor: ", backgroundColor.value);
 
           personInfo.personalTextSize = newPersonalTextSize.value;
           personInfo.orgTextSize = newOrgTextSize.value;
@@ -121,14 +112,12 @@ var personInfo = {
           }
           personInfo.personID = fullPersonID;
 
-
           modals[1].classList.toggle('hidden');
           modals[2].classList.toggle('hidden');
 
         } else {
           alert('Please fill out all values on this form');
         }
-
     });
 
     nextButton[2].addEventListener('click', function() {
@@ -144,16 +133,16 @@ var personInfo = {
       if ( (newDate.value !== "") && (newRecipientNameInput.value !== "") && (newRecipientTitleInput.value !== "") && (newCompanyNameInput.value !== "") &&
          (newRecipientStreetInput.value !== "") && (newRecipientCityInput.value !== "") && (newRecipientStateInput.value !== "") && (newRecipientZipCodeInput.value !== "") ) {
 
-           console.log("Made it through third modal");
+          console.log("Made it through third modal");
 
-           console.log("newDate: ", newDate.value);
-           console.log("newRecipientNameInput: ", newRecipientNameInput.value);
-           console.log("newRecipientTitleInput: ", newRecipientTitleInput.value);
-           console.log("newCompanyNameInput", newCompanyNameInput.value);
-           console.log("newRecipientStreetInput: ", newRecipientStreetInput.value);
-           console.log("newRecipientCityInput: ", newRecipientCityInput.value);
-           console.log("newRecipientStateInput:", newRecipientStateInput.value);
-           console.log("newRecipientZipCodeInput", newRecipientZipCodeInput.value);
+          console.log("newDate: ", newDate.value);
+          console.log("newRecipientNameInput: ", newRecipientNameInput.value);
+          console.log("newRecipientTitleInput: ", newRecipientTitleInput.value);
+          console.log("newCompanyNameInput", newCompanyNameInput.value);
+          console.log("newRecipientStreetInput: ", newRecipientStreetInput.value);
+          console.log("newRecipientCityInput: ", newRecipientCityInput.value);
+          console.log("newRecipientStateInput:", newRecipientStateInput.value);
+          console.log("newRecipientZipCodeInput", newRecipientZipCodeInput.value);
 
           personInfo.Date = newDate.value;
           personInfo.recipientName = newRecipientNameInput.value;
@@ -164,18 +153,13 @@ var personInfo = {
           personInfo.recipientState = newRecipientStateInput.value;
           personInfo.recipientZipCode = newRecipientZipCodeInput.value;
 
-
-
-           modals[2].classList.toggle('hidden');
-           modals[3].classList.toggle('hidden');
-
-
+          modals[2].classList.toggle('hidden');
+          modals[3].classList.toggle('hidden');
 
       } else {
           alert('Please fill out all values on this form');
       }
     });
-
 
     for (let b = 0; b < closeButton.length; b++) {
       closeButton[b].addEventListener('click', function () {
@@ -195,17 +179,16 @@ var personInfo = {
 
         personInfo.summary = summaryInput.value;
 
-
         /* send server request */
         var request = new XMLHttpRequest();
-        request.open('POST', '/createresume);
+        request.open('POST', '/createresume');
 
         var requestBody = JSON.stringify(personInfo);
         console.log("==requestBody: ", requestBody);
 
-        request.addEventListener('load', function(event) {
-          if (event.target.status === 200) {
+        request.addEventListener('load', function(err, event) {
 
+          if (event.target.status === 200) {
             var newDiv = document.createElement('div');
             var newA = document.createElement('a');
             newA.href = "/person/" + personInfo.personID;
@@ -213,13 +196,18 @@ var personInfo = {
             newDiv.appendChild(newA);
             var container = document.getElementsByTagName('main');
             container[0].appendChild(newDiv);
-          } else {
+          }
+
+          else if(err) {
             var message = event.target.response;
             alert("Error - User info could not be saved on server: " + message);
           }
-          modals[3].classList.add('hidden');
-      } else {
-        alert('Please fill out all values on this form');
-      }
 
-    });
+          modals[3].classList.add('hidden');
+
+          else {
+            alert("Please fill out all values on this form");
+          }   
+      });
+    }
+  });
