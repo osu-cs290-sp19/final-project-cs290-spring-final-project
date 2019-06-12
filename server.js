@@ -10,11 +10,15 @@ var port = process.env.PORT || 3000;
 
 var mongoHost = process.env.MONGO_HOST || '127.0.0.1';
 var mongoPort = process.env.MONGO_PORT || 27017;
-var mongoUser = process.env.MONGO_USER || '';
-var mongoPassword = process.env.MONGO_PASSWORD || '';
-var mongoDBName = process.env.MONGO_DB_NAME;
+var mongoUser = process.env.MONGO_USER;
+var mongoPassword = process.env.MONGO_PASSWORD;
+var mongoDBName = process.env.MONGO_DB_NAME || 'something';
 
 var mongoUrl = `mongodb://${mongoUser}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDBName}`;
+if (fs.existsSync('.dev')) {
+  mongoUrl = `mongodb://${mongoHost}:${mongoPort}/${mongoDBName}`;
+}
+
 var db = null;
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
@@ -26,7 +30,7 @@ app.use(express.static('public'));
 app.use(express.static('views'));
 
 app.get(['/','index.html'], function (req, res, next) {
-    var collection = db.collect('people');
+    var collection = db.collection('people');
     res.status(200).render('home', { people: collection });
 });
 
