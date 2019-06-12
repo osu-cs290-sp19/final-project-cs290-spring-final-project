@@ -8,11 +8,11 @@ var MongoClient = require('mongodb').MongoClient;
 var app = express();
 var port = process.env.PORT || 3000;
 
-var mongoHost = process.env.MONGO_HOST;
+var mongoHost = process.env.MONGO_HOST || "classmongo.engr.oregonstate.edu";
 var mongoPort = process.env.MONGO_PORT || 27017;
-var mongoUser = process.env.MONGO_USER;
-var mongoPassword = process.env.MONGO_PASSWORD;
-var mongoDBName = process.env.MONGO_DB_NAME;
+var mongoUser = process.env.MONGO_USER || "cs290_trinhan";
+var mongoPassword = process.env.MONGO_PASSWORD || "cs290_trinhan";
+var mongoDBName = process.env.MONGO_DB_NAME || "people";
 
 var mongoUrl = `mongodb://${mongoUser}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDBName}`;
 var db = null;
@@ -27,32 +27,15 @@ app.use(express.static('views'));
 
 
 
-
-/*
 app.get(['/','index.html'], function (req, res, next) {
     var collection = db.collect('people');
     res.status(200).render('home', { people: collection });
-);
+});
 
 
 
 
-app.get('/person/:personID') {
-  var personIDRequested = req.params.personID.toLowerCase();
-  var collection = db.collection('people');
-  collection.find({ personID: personIDRequested }).toArray(function (err,people) {
-    if (err) {
-      res.status(500).send({
-        error: "Not a valid person"
-      });
-    } else if (people.length < 1) {
-      next();
-    } else {
-      console.log("==Person Info: ", people);
-      res.status(200).render('coverTemplate', people[0]);
-    }
-  }
-}
+
 
 app.post("/createresume", function (req, res, next) {
   if (req.body && req.personID && req.name && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
@@ -85,21 +68,28 @@ app.post("/createresume", function (req, res, next) {
       });
       res.status(200).send("Information saved successfully");
     } else {
-      res.status(500).send({
-        error: "Information could not be sent to server"
-      })
+      res.status(500).send("Information could not be sent to server");
     }
 });
 
 
-
-
-
-
+app.get('/person/:personID', function (req, res, next) {
+  var personIDRequested = req.params.personID.toLowerCase();
+  var collection = db.collection('people');
+  collection.find({ personID: personIDRequested }).toArray(function (err, people) {
+    if (err) {
+      res.status(500).send({
+        error: "Not a valid person"
+      });
+    } else if (people.length < 1) {
+      next();
+    } else {
+      console.log("==Person Info: ", people);
+      res.status(200).render('coverTemplate', people[0]);
     }
-  }
+  });
+});
 
-}
 
 
 app.get('*', function (req, res) {
@@ -107,7 +97,7 @@ app.get('*', function (req, res) {
 });
 
 
-MongoClient.connect(mongoUrl, function (err, client) {
+MongoClient.connect(mongoUrl, { useNewUrlParser: true }, function (err, client) {
   if (err) {
     throw err;
   } else {
