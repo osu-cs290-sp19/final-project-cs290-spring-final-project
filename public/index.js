@@ -29,16 +29,6 @@ var personInfo = {
   summaryText: ""
 };
 
-function getPersonIdFromURL() {
-  var path = window.location.pathname;
-  var pathParts = path.split('/');
-  if (pathParts[1] === "people") {
-    return pathParts[2];
-  } else {
-    return null;
-  }
-}
-
     getStartedButton.addEventListener('click', function() {
             modals[0].classList.toggle('hidden');
         //Open modal when 'Get Started' is clicked
@@ -168,9 +158,9 @@ function getPersonIdFromURL() {
       }
     });
 
-    for (var b = 0; b < closeButton.length; b++) {
+    for (let b = 0; b < closeButton.length; b++) {
       closeButton[b].addEventListener('click', function () {
-        for (var c = 0; c < modals.length; c++) {
+        for (let c = 0; c < modals.length; c++) {
           modals[c].classList.add('hidden');
         }
       });
@@ -187,30 +177,66 @@ function getPersonIdFromURL() {
         personInfo.summaryText = summaryInput.value;
 
         /* send server request */
-        var request = new XMLHttpRequest();
-        var requestURL = '/people/' + getPersonIdFromURL() + '/createresume';
-        request.open('POST', requestURL);
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', '/createresume');
 
-        var requestBody = JSON.stringify(personInfo);
+        var requestBody = JSON.stringify( {
+          personID: personInfo.personID,
+          personName: personInfo.personName,
+          streetAddress: personInfo.streetAddress,
+          city: personInfo.city,
+          state: personInfo.state,
+          zipCode: personInfo.zipCode,
+          number: personInfo.number,
+          emailAddress: personInfo.emailAddress,
+          date: personInfo.date,
+          recipientName: personInfo.recipientName,
+          recipientTitle: personInfo.recipientTitle,
+          companyName: personInfo.companyName,
+          recipientAddress: personInfo.recipientAddress,
+          recipientCity: personInfo.recipientCity,
+          recipientState: personInfo.recipientState,
+          recipientZipCode: personInfo.recipientZipCode,
+          fontType: personInfo.fontType,
+          personalTextSize: personInfo.personalTextSize,
+          orgTextSize: personInfo.orgTextSize,
+          summaryTextSize: personInfo.summaryTextSize,
+          colorSelected: personInfo.colorSelected,
+          summaryText: personInfo.summaryText
+        });
+
+
+
         console.log("==requestBody: ", requestBody);
 
-        request.addEventListener('load', function(event) {
+        postRequest.addEventListener('load', function(event) {
+
+          console.log("Trying to send request");
 
           if (event.target.status === 200) {
+
+
+
+
             var newDiv = document.createElement('div');
+            newDiv.classList.add('person-link');
             var newA = document.createElement('a');
-            newA.href = '/person/' + personInfo.personID;
-            newA.textContent = personInfo.name;
+            newA.href = "/people/" + personInfo.personID;
+            newA.textContent = personInfo.personName;
             newDiv.appendChild(newA);
-            var container = document.getElementsByTagName('main');
+            var container = document.getElementsByClassName('display-flex');
             container[0].appendChild(newDiv);
+
           } else {
             var message = event.target.response;
-            alert('Error - User info could not be saved on server: ' + message);
+            alert("Error - User info could not be saved on server: " + message);
           }
         });
-        modals[3].classList.add('hidden');
+        
+      postRequest.setRequestHeader('Content-Type', 'application/json');
+      postRequest.send(requestBody);
+      modals[3].classList.add('hidden');
       } else {
-            alert('Please fill out all values on this form');
+            alert("Please fill out all values on this form");
       }
   });
