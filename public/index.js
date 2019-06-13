@@ -27,7 +27,18 @@ var personInfo = {
   summaryTextSize: "",
   colorSelected: "",
   summaryText: ""
+};
+
+function getPersonIdFromURL() {
+  var path = window.location.pathname;
+  var pathParts = path.split('/');
+  if (pathParts[1] === "people") {
+    return pathParts[2];
+  } else {
+    return null;
+  }
 }
+
     getStartedButton.addEventListener('click', function() {
             modals[0].classList.toggle('hidden');
         //Open modal when 'Get Started' is clicked
@@ -157,9 +168,9 @@ var personInfo = {
       }
     });
 
-    for (let b = 0; b < closeButton.length; b++) {
+    for (var b = 0; b < closeButton.length; b++) {
       closeButton[b].addEventListener('click', function () {
-        for (let c = 0; c < modals.length; c++) {
+        for (var c = 0; c < modals.length; c++) {
           modals[c].classList.add('hidden');
         }
       });
@@ -177,7 +188,8 @@ var personInfo = {
 
         /* send server request */
         var request = new XMLHttpRequest();
-        request.open('POST', '/createresume');
+        var requestURL = '/people/' + getPersonIdFromURL() + '/createresume';
+        request.open('POST', requestURL);
 
         var requestBody = JSON.stringify(personInfo);
         console.log("==requestBody: ", requestBody);
@@ -187,18 +199,18 @@ var personInfo = {
           if (event.target.status === 200) {
             var newDiv = document.createElement('div');
             var newA = document.createElement('a');
-            newA.href = "/person/" + personInfo.personID;
+            newA.href = '/person/' + personInfo.personID;
             newA.textContent = personInfo.name;
             newDiv.appendChild(newA);
             var container = document.getElementsByTagName('main');
             container[0].appendChild(newDiv);
           } else {
             var message = event.target.response;
-            alert("Error - User info could not be saved on server: " + message);
+            alert('Error - User info could not be saved on server: ' + message);
           }
         });
         modals[3].classList.add('hidden');
       } else {
-            alert("Please fill out all values on this form");
+            alert('Please fill out all values on this form');
       }
   });

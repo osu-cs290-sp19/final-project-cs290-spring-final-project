@@ -38,8 +38,6 @@ app.get(['/','index.html'], function (req, res, next) {
     res.status(200).render('home', { people: collection });
 });
 
-
-
 app.get('/person/:personID', function (req, res, next) {
   var personIDRequested = req.params.personID.toLowerCase();
   var collection = db.collection('people');
@@ -57,10 +55,8 @@ app.get('/person/:personID', function (req, res, next) {
   });
 });
 
-app.post('/createresume', function (req, res, next) {
-  if (req.body && req.personID && req.personName && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
-     && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType
-     && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.colorSelected && req.summaryText) {
+app.post('/person/:personID/createresume', function (req, res, next) {
+  if (req.body && req.personID && req.personName && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.colorSelected && req.summaryText) {
       var collection = db.collection('people');
       collection.insertOne( {
         personID: req.personID,
