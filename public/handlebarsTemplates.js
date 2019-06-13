@@ -7,11 +7,11 @@ templates['coverTemplate'] = template({"compiler":[7,">= 4.0.0"],"main":function
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<header>\n\n  <h1 class=\"webpage-title\">Cover Letter Template</h1>\n\n  <nav class=\"navbar\">\n      <button type=\"button\" id=\"create-resume-button\">"
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.personName || (depth0 != null ? depth0.personName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"personName","hash":{},"data":data}) : helper)))
     + "'s Resume</button>\n  </nav>\n\n</header>\n\n\n<main id="
     + alias4(((helper = (helper = helpers["font-type"] || (depth0 != null ? depth0["font-type"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"font-type","hash":{},"data":data}) : helper)))
     + " class="
-    + alias4(((helper = (helper = helpers.backgroundColor || (depth0 != null ? depth0.backgroundColor : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"backgroundColor","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.colorSelected || (depth0 != null ? depth0.colorSelected : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"colorSelected","hash":{},"data":data}) : helper)))
     + ">\n\n  <div class=\"intro-container "
     + alias4(((helper = (helper = helpers.personalTextSize || (depth0 != null ? depth0.personalTextSize : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"personalTextSize","hash":{},"data":data}) : helper)))
     + "\">\n\n      <div class=\"intro-text text-box\">\n        <h2>"
@@ -51,7 +51,7 @@ templates['coverTemplate'] = template({"compiler":[7,">= 4.0.0"],"main":function
     + ",</h2>\n    </div>\n  </article>\n\n  <div class=\"summary-container "
     + alias4(((helper = (helper = helpers.summaryTextSize || (depth0 != null ? depth0.summaryTextSize : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"summaryTextSize","hash":{},"data":data}) : helper)))
     + "\">\n    <p>"
-    + alias4(((helper = (helper = helpers.summary || (depth0 != null ? depth0.summary : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"summary","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.summaryText || (depth0 != null ? depth0.summaryText : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"summaryText","hash":{},"data":data}) : helper)))
     + "</p>\n  </div>\n\n  <div class=\"ending-container "
     + alias4(((helper = (helper = helpers.summaryTextSize || (depth0 != null ? depth0.summaryTextSize : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"summaryTextSize","hash":{},"data":data}) : helper)))
     + "\">\n    <div>\n      <h2>Sincerely,</h2>\n    </div>\n\n    <div>\n      <h2>"
@@ -64,7 +64,7 @@ templates['home'] = template({"1":function(container,depth0,helpers,partials,dat
   return "  <div>\n    <a href=\"/people/"
     + alias4(((helper = (helper = helpers.personID || (depth0 != null ? depth0.personID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"personID","hash":{},"data":data}) : helper)))
     + "\">"
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.personName || (depth0 != null ? depth0.personName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"personName","hash":{},"data":data}) : helper)))
     + "</a>\n  </div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
