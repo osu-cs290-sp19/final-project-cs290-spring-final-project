@@ -4,7 +4,7 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
-const dotenv = require('dotenv').config()
+const dotenv = require('dotenv').config();
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -52,7 +52,6 @@ app.get('/person/:personID', function (req, res, next) {
   });
 });
 
-
 app.post('/createresume', function (req, res, next) {
   if (req.body && req.personID && req.name && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
      && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType
@@ -90,8 +89,6 @@ app.post('/createresume', function (req, res, next) {
     });
   }
 });
-
-
 
 app.get('*', function (req, res) {
   res.status(404).render('404');
