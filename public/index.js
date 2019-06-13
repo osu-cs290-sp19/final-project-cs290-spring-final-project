@@ -186,7 +186,7 @@ var personInfo = {
         var requestBody = JSON.stringify(personInfo);
         console.log("==requestBody: ", requestBody);
 
-        request.addEventListener('load', function(err, event) {
+        request.addEventListener('load', function(event) {
 
           if (event.target.status === 200) {
             var newDiv = document.createElement('div');
@@ -198,7 +198,7 @@ var personInfo = {
             container[0].appendChild(newDiv);
           }
 
-          else if(err) {
+          else {
             var message = event.target.response;
             alert("Error - User info could not be saved on server: " + message);
           }
