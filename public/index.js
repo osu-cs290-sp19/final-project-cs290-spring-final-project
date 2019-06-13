@@ -6,7 +6,7 @@ var finishButton = document.getElementById('finish-button');
 
 var personInfo = {
   personID: "",
-  name: "",
+  personName: "",
   streetAddress: "",
   city: "",
   state: "",
@@ -25,15 +25,12 @@ var personInfo = {
   personalTextSize: "",
   orgTextSize: "",
   summaryTextSize: "",
-  backgroundColor: "",
-  summary: ""
-}
+  colorSelected: "",
+  summaryText: ""
+};
+
     getStartedButton.addEventListener('click', function() {
-        if(getStartedButton.value === "Get Started") {
             modals[0].classList.toggle('hidden');
-
-
-        }
         //Open modal when 'Get Started' is clicked
     });
 
@@ -48,17 +45,17 @@ var personInfo = {
 
           console.log("Made it through first modal")
 
-          console.log("personalTextSize: ", personalTextSize.value);
-          console.log("orgTextSize: ", orgTextSize.value);
-          console.log("summaryTextSize: ", summaryTextSize.value);
-          console.log("fontType: ", fontType.value);
-          console.log("backgroundColor: ", backgroundColor.value);
+          console.log("newPersonalTextSize: ", newPersonalTextSize.value);
+          console.log("newOrgTextSize: ", newOrgTextSize.value);
+          console.log("newSummaryTextSize: ", newSummaryTextSize.value);
+          console.log("newFontType: ", newFontType.value);
+          console.log("newBackgroundColor: ", newBackgroundColor.value);
 
           personInfo.personalTextSize = newPersonalTextSize.value;
           personInfo.orgTextSize = newOrgTextSize.value;
           personInfo.summaryTextSize = newSummaryTextSize.value;
           personInfo.fontType = newFontType.value;
-          personInfo.backgroundColor = newBackgroundColor.value;
+          personInfo.colorSelected = newBackgroundColor.value;
 
           /* do logic */
           modals[0].classList.toggle('hidden');
@@ -91,7 +88,7 @@ var personInfo = {
           console.log("newPersonZipCodeInput: ", newPersonZipCodeInput.value);
           console.log("newPersonNumberInput: ", newPersonNumberInput.value);
 
-          personInfo.name = newPersonNameInput.value;
+          personInfo.personName = newPersonNameInput.value;
           personInfo.emailAddress = newPersonEmailInput.value;
           personInfo.streetAddress = newPersonStreetInput.value;
           personInfo.city = newPersonCityInput.value;
@@ -177,37 +174,69 @@ var personInfo = {
 
         console.log("summaryInput: ", summaryInput);
 
-        personInfo.summary = summaryInput.value;
+        personInfo.summaryText = summaryInput.value;
 
         /* send server request */
-        var request = new XMLHttpRequest();
-        request.open('POST', '/createresume');
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', '/createresume');
 
-        var requestBody = JSON.stringify(personInfo);
+        var requestBody = JSON.stringify( {
+          personID: personInfo.personID,
+          personName: personInfo.personName,
+          streetAddress: personInfo.streetAddress,
+          city: personInfo.city,
+          state: personInfo.state,
+          zipCode: personInfo.zipCode,
+          number: personInfo.number,
+          emailAddress: personInfo.emailAddress,
+          date: personInfo.date,
+          recipientName: personInfo.recipientName,
+          recipientTitle: personInfo.recipientTitle,
+          companyName: personInfo.companyName,
+          recipientAddress: personInfo.recipientAddress,
+          recipientCity: personInfo.recipientCity,
+          recipientState: personInfo.recipientState,
+          recipientZipCode: personInfo.recipientZipCode,
+          fontType: personInfo.fontType,
+          personalTextSize: personInfo.personalTextSize,
+          orgTextSize: personInfo.orgTextSize,
+          summaryTextSize: personInfo.summaryTextSize,
+          colorSelected: personInfo.colorSelected,
+          summaryText: personInfo.summaryText
+        });
+
+
+
         console.log("==requestBody: ", requestBody);
 
-        request.addEventListener('load', function(err, event) {
+        postRequest.addEventListener('load', function(event) {
+
+          console.log("Trying to send request");
 
           if (event.target.status === 200) {
-            var newDiv = document.createElement('div');
-            var newA = document.createElement('a');
-            newA.href = "/person/" + personInfo.personID;
-            newA.textContent = personInfo.name;
-            newDiv.appendChild(newA);
-            var container = document.getElementsByTagName('main');
-            container[0].appendChild(newDiv);
-          }
 
-          else if(err) {
+
+
+
+            var newDiv = document.createElement('div');
+            newDiv.classList.add('person-link');
+            var newA = document.createElement('a');
+            newA.href = "/people/" + personInfo.personID;
+            newA.textContent = personInfo.personName;
+            newDiv.appendChild(newA);
+            var container = document.getElementsByClassName('display-flex');
+            container[0].appendChild(newDiv);
+
+          } else {
             var message = event.target.response;
             alert("Error - User info could not be saved on server: " + message);
           }
-
-          modals[3].classList.add('hidden');
-
-          else {
+        });
+        
+      postRequest.setRequestHeader('Content-Type', 'application/json');
+      postRequest.send(requestBody);
+      modals[3].classList.add('hidden');
+      } else {
             alert("Please fill out all values on this form");
-          }   
-      });
-    }
+      }
   });

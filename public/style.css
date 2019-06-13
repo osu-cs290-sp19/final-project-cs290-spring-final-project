@@ -18,6 +18,10 @@
   display: none;
 }
 
+#hidden {
+  display: none;
+}
+
 #create-resume-button:hover {
     cursor: pointer;
     background: lightblue;
@@ -225,4 +229,25 @@ body {
 
 .white {
   background-color: white;
+}
+
+.person-link {
+  flex: 1 30px;
+  max-height: 40px;
+  width: 80%;
+  text-align: center;
+  align: center;
+  align-content: center;
+}
+
+.display-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  text-align: center;
+  background-color: lightgrey;
+  align: center;
+  align-content: center;
 }
