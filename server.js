@@ -4,7 +4,7 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config()
 
 var app = express();
 var port = process.env.PORT || 9999;
@@ -35,13 +35,24 @@ app.use(express.static('views'));
 
 app.get(['/','index.html'], function (req, res, next) {
     var collection = db.collection('people');
-    res.status(200).render('home', { people: collection });
+    collection.find({}).toArray(function (err, peopleData) {
+        if (err) {
+          res.status(500).send( {
+            error: "Error fetching this person's info"
+          });
+        } else {
+          console.log("==All people: ", peopleData);
+          res.status(200).render('home', { people : peopleData})
+        }
+    });
 });
 
-app.get('/person/:personID', function (req, res, next) {
-  var personIDRequested = req.params.personID.toLowerCase();
+
+
+app.get('/people/:person', function (req, res, next) {
+  var personIDRequested = req.params.person.toLowerCase();
   var collection = db.collection('people');
-  collection.find({ personID: personIDRequested }).toArray(function (err,people) {
+  collection.find({ personID: personIDRequested }).toArray(function (err, people) {
     if (err) {
       res.status(500).send({
         error: "Not a valid person"
@@ -49,47 +60,55 @@ app.get('/person/:personID', function (req, res, next) {
     } else if (people.length < 1) {
       next();
     } else {
-      console.log("==Person Info: ", people);
+      console.log("==Person Info: ", people[0]);
       res.status(200).render('coverTemplate', people[0]);
     }
   });
 });
 
-app.post('/person/:personID/createresume', function (req, res, next) {
-  if (req.body && req.personID && req.personName && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.colorSelected && req.summaryText) {
+
+app.post('/createresume', function (req, res, next) {
+  if (req.body) {
+
+      console.log("Trying to store info, have all info");
+
       var collection = db.collection('people');
+      
       collection.insertOne( {
-        personID: req.personID,
-        personName: req.personName,
-        streetAddress: req.streetAddress,
-        city: req.city,
-        state: req.state,
-        zipCode: req.zipCode,
-        number: req.number,
-        emailAddress: req.emailAddress,
-        date: req.date,
-        recipientName: req.recipientName,
-        recipientTitle: req.recipientTitle,
-        companyName: req.companyName,
-        recipientAddress: req.recipientAddress,
-        recipientCity: req.recipientCity,
-        recipientState: req.recipientState,
-        recipientZipCode: req.recipientZipCode,
-        fontType: req.fontType,
-        personalTextSize: req.personalTextSize,
-        orgTextSize: req.orgTextSize,
-        summaryTextSize: req.summaryTextSize,
-        colorSelected: req.colorSelected,
-        summaryText: req.summaryText
+        personID: req.body.personID,
+        personName: req.body.personName,
+        streetAddress: req.body.streetAddress,
+        city: req.body.city,
+        state: req.body.state,
+        zipCode: req.body.zipCode,
+        number: req.body.number,
+        emailAddress: req.body.emailAddress,
+        date: req.body.date,
+        recipientName: req.body.recipientName,
+        recipientTitle: req.body.recipientTitle,
+        companyName: req.body.companyName,
+        recipientAddress: req.body.recipientAddress,
+        recipientCity: req.body.recipientCity,
+        recipientState: req.body.recipientState,
+        recipientZipCode: req.body.recipientZipCode,
+        fontType: req.body.fontType,
+        personalTextSize: req.body.personalTextSize,
+        orgTextSize: req.body.orgTextSize,
+        summaryTextSize: req.body.summaryTextSize,
+        colorSelected: req.body.colorSelected,
+        summaryText: req.body.summaryText
       });
     res.status(200).send("Information saved successfully");
 
   } else {
+    console.log("==Couldn't store info");
     res.status(500).send({
       error: "Information could not be sent to server"
     });
   }
 });
+
+
 
 app.get('*', function (req, res) {
   res.status(404).render('404');
@@ -105,3 +124,35 @@ MongoClient.connect(mongoUrl, { useNewUrlParser: true }, function (err, client) 
     });
   }
 });
+
+
+
+
+
+/*
+
+db.people.insertOne({
+        personID: "temptest",
+        personName: "temptest",
+        streetAddress: "0000 Street Address",
+        city: "City",
+        state: "State",
+        zipCode: "97200",
+        number: "971-000-000",
+        emailAddress: "tempemail@gmail.com",
+        date: "01/01/2019",
+        recipientName: "John Doe",
+        recipientTitle: "CEO",
+        companyName: "Company",
+        recipientAddress: "1000 Street Address",
+        recipientCity: "City",
+        recipientState: "State",
+        recipientZipCode: "97211",
+        fontType: "helvetica",
+        personalTextSize: "text-14",
+        orgTextSize: "text-14",
+        summaryTextSize: "text-12",
+        colorSelected: "lightgrey",
+        summaryText: "Filler Text Filler Text" });
+
+*/
