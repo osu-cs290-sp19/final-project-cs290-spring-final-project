@@ -7,7 +7,7 @@ var MongoClient = require('mongodb').MongoClient;
 const dotenv = require('dotenv').config();
 
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 9999;
 
 var mongoHost = process.env.MONGO_HOST || '127.0.0.1';
 var mongoPort = process.env.MONGO_PORT || 27017;
@@ -16,9 +16,12 @@ var mongoPassword = process.env.MONGO_PASSWORD;
 var mongoDBName = process.env.MONGO_DB_NAME || 'something';
 
 var mongoUrl = `mongodb://${mongoUser}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDBName}`;
+
+/*
 if (fs.existsSync('.dev')) {
   mongoUrl = `mongodb://${mongoHost}:${mongoPort}/${mongoDBName}`;
 }
+*/
 
 var db = null;
 
@@ -34,6 +37,8 @@ app.get(['/','index.html'], function (req, res, next) {
     var collection = db.collection('people');
     res.status(200).render('home', { people: collection });
 });
+
+
 
 app.get('/person/:personID', function (req, res, next) {
   var personIDRequested = req.params.personID.toLowerCase();
@@ -53,13 +58,13 @@ app.get('/person/:personID', function (req, res, next) {
 });
 
 app.post('/createresume', function (req, res, next) {
-  if (req.body && req.personID && req.name && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
+  if (req.body && req.personID && req.personName && req.streetAddress && req.city && req.state && req.zipCode && req.number && req.emailAddress && req.date && req.recipientName
      && req.recipientTitle && req.companyName && req.recipientAddress && req.recipientCity && req.recipientState && req.recipientZipCode && req.fontType
-     && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.backgroundColor && req.summary) {
+     && req.personalTextSize && req.orgTextSize && req.summaryTextSize && req.colorSelected && req.summaryText) {
       var collection = db.collection('people');
       collection.insertOne( {
         personID: req.personID,
-        name: req.name,
+        personName: req.personName,
         streetAddress: req.streetAddress,
         city: req.city,
         state: req.state,
@@ -78,8 +83,8 @@ app.post('/createresume', function (req, res, next) {
         personalTextSize: req.personalTextSize,
         orgTextSize: req.orgTextSize,
         summaryTextSize: req.summaryTextSize,
-        backgroundColor: req.backgroundColor,
-        summary: req.summary
+        colorSelected: req.colorSelected,
+        summaryText: req.summaryText
       });
     res.status(200).send("Information saved successfully");
 
